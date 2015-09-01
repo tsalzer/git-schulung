@@ -6,8 +6,8 @@ Git-Schulung. Wenn es irgendwann mal fertig ist wird es fertige Unterlagen
 für eine Git-Schulung enthalten.
 
 
-Authoren
---------
+Autoren
+-------
 
 - [Robert Peters](https://github.com/r2p2)
 - [Till Salzer](https://github.com/tsalzer)
