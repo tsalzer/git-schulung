@@ -1,0 +1,158 @@
+Git Schulung
+2015-10-19
+Tags: git
+
+Andreas Fett & Till Salzer
+iSAX
+andreas.fett@isax.com, till.salzer@isax.com
+http://isax.com
+
+
+* Ziel
+Ihr kommt beim Andi ins Projekt und sollt dort produktiv arbeiten und nix kaputt machen.
+
+Was bedeutet das?
+- Ihr arbeitet per *ssh* auf der _Kommandozeile_.
+- Ihr programmiert im *vim*
+- Ihr checked Eure Arbeit in ein (mehrere) git Repos ein. Auf diesen Repos ist keine Beschränkung, wer nicht aufpasst muss zum Admin Backups anfordern.
+
+Was bedeutet das nicht?
+- IDE Integration (eclipse, netbeans, github, emacs, vim)
+- Spezielle toolgebunden Workflows
+(Damit Ihr die Grundlagen habt und verstehen könnt an welchen Stellen Euch die Tools helfen und wo sie Euch im Weg sind.)
+
+- Administration der Repos (Sprengt den Rahmen)
+
+* Ich komme gar nicht zum Andi in Projekt!
+Ihr wollt das trotzdem wissen:
+- Zusammenarbeit
+- Historie (Fehlersuche, Dokumentation), wer hat was warum gemacht?
+- Featureentwicklung (ich mach was, was ansonsten den Code kaputt macht)
+- Backup
+- Was haben wir dem Kunden wann geliefert (auch aus Debugging Sicht interessant)
+
+* Arbeiten mit dem Repo Do's und Dont's
+
+checke ein:
+- Alles was andere brauchen um mit den Projekt arbeiten zu können.
+(Source, Makefiles, Doku, ...)
+
+checke nicht ein was:
+- niemand sehen soll (Password, SSH-Key, kein Zugriffsschutz, .gitignore)
+- niemand sehen muss (alles, was aus dem generiert werden kann, was schon eingecheckt ist, tmp files, persönliche Konfig)
+- niemand sehen will (kaputte Unit tests, nicht kompilierender Code...)
+
+
+* Git Objekte
+
+Logische Objekte
+- Repository: Ein Container der eine Reihe von zusammengehörigen anderen Git Objekten verwaltet
+- Im Repository abgelegte Objekte:
+- Commit: Änderung an den Nutzdaten + Metadaten (Autor, Zeit, Commitmessage, ...). Aus diesen Daten leitet sich die Commit-Id ab.
+- Tag (Name für einen Commit)
+- Branch (eine Reihe von Commits) (svn trunk -> git master)
+(Abbildung)
+
+Filesystem Objekte
+- Repository (.git/)
+- working directory (Verzeichnis(baum) in dem .git/ liegt)
+- working directory ist immer genau eine Revision (Commit/Tag/Branch)
+
+
+* Dezentral verteilte Versionskontrollsysteme (DRCS)
+- Jeder arbeitet immer lokal mit einem vollständigen Repository
+- Alle Repos sind gleichwertig, und lassen sich synchronisieren (meist wird ein organisatorisch "zentrales" Repo ausgewält: ist immer im Netz, hat Backup etc)
+- Keine (zentralen) Versionsnummern sondern Indizierung über den Inhalt
+- man muss nicht "online" sein um Commits, Tags und Branches bearbeiten zu können, nur zum Synchronisieren.
+(Abbildung)
+
+
+* Praxisteil (1h)
+
+* Git configurieren (10m)
+  git config --global Author
+  git config --global uicolor
+
+* Clonen eines bestehenden Repos (5min)
+(Überleitung)
+
+  git clone  # (remote git nativ)
+  git log
+  git log  # (fancy)
+  git status (on branch master)
+
+
+* Einchecken einer Datei (Unterschied Index Commit) (5min + 5 Reibungsverluste)
+(neue Datei)
+- eine neue Datei anlegen (vim foo.txt)
+  git status
+- git hat eine "Staging Area" (Index) um den Commit "vorzubereiten"
+
+  git add foo.txt
+  git status
+
+  git commit (-v)
+
+*Beachten:*
+Commit Message: Format und Inhalt
+- muss gesetzt sein (Denkt dran, das ist Doku, Nachvollziebarkeit!)
+- Format Subject, Leerzeile, Body
+
+  git status
+  git log
+
+* Änderung (5min)
+(Konflikt vorprogrammieren (paarweise))
+
+  git diff
+  git status
+  git add
+  git status
+  git diff
+  git diff --cached
+  git commit -v
+
+
+* Push (5min)
+  git push (rejected, erklären)
+  git fetch (sync des upstream zu Euch)
+  git status (keine Änderung)
+  git log --all
+
+* Konflikt Lösung (5min)
+
+  git rebase # (was passiert hier)
+  git status # (Konflikt angezeigt)
+
+Konflikt lösen: Editieren mit *vim*
+
+  git add
+  git commit
+
+
+* Fetch und rebase bis commit durch geht (5min)
+Erklärung: Lokales Repo muss in sync mit Remote sein
+
+  git push
+  git rebase
+
+ohne Konflikt!
+
+* Branch anlegen (5min)
+  git checkout -b foobar
+  git status  # (on branch foobar)
+  git checkout master
+  git status  # (on branch master)
+  git checkout foobar
+  git status  # (on branch foobar)
+commit auf Branch:
+  git commit -v
+  push auf branch
+
+* Integration (nur Vortänzer) 5min
+  git branch -r
+  git merge alle branch namen
+  git log
+
+* The End.
+60min
