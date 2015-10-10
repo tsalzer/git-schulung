@@ -9,9 +9,9 @@ für eine Git-Schulung enthalten.
 Autoren
 -------
 
+- [Andreas Fett](https://github.com/afett)
 - [Robert Peters](https://github.com/r2p2)
 - [Till Salzer](https://github.com/tsalzer)
-
 
 Lizenz
 ------
