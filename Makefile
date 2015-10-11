@@ -14,3 +14,6 @@ $(PRESENT_BIN):
 	GOPATH=$(GOPATH) go get $(PRESENT)
 	GOPATH=$(GOPATH) go install $(PRESENT)
 	test -f $(PRESENT_BIN)
+
+docker:
+	docker build -t git-schulung .
