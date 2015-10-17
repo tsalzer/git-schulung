@@ -12,19 +12,32 @@ http://isax.com
 Ihr kommt beim Andi ins Projekt und sollt dort produktiv arbeiten und nix kaputt machen.
 
 Was bedeutet das?
-- Ihr arbeitet per *ssh* auf der _Kommandozeile_.
-- Ihr programmiert im *vim*
-- Ihr checked Eure Arbeit in ein (mehrere) git Repos ein. Auf diesen Repos ist keine Beschränkung, wer nicht aufpasst muss zum Admin Backups anfordern.
 
-Was bedeutet das nicht?
-- IDE Integration (eclipse, netbeans, github, emacs, vim)
-- Spezielle toolgebunden Workflows
-(Damit Ihr die Grundlagen habt und verstehen könnt an welchen Stellen Euch die Tools helfen und wo sie Euch im Weg sind.)
+- Ihr arbeitet per *ssh* auf der _Kommandozeile_.
+- Ihr arbeitet im *vim*
+- Ihr checked Eure Arbeit in viele geteilte git *Repos* ein.
+
+.image img/shame.jpg
+.caption Geteilte Repos sind wie SVN Repos: Der Admin hat das Backup.
+
+* Ziel (weiter...)
+Ihr kommt beim Andi ins Projekt und sollt dort produktiv arbeiten und nix kaputt machen.
+
+Was bedeutet das *nicht*?
+
+- Wir erklären euch die IDE Integration (eclipse, netbeans, github, emacs, vim)
+- Wir erklären euch toolgebunden Workflows (z.B. _gitflow_)
+- Wir erklären euch Repo-Administration
+
+.image img/overload.jpg
+.caption Das wäre zu viel. Ihr lernt die Grundlagen kennen und versteht, wo euch die Tools helfen.
 
 - Administration der Repos (Sprengt den Rahmen)
 
 * Ich komme gar nicht zum Andi in Projekt!
+
 Ihr wollt das trotzdem wissen:
+
 - Zusammenarbeit
 - Historie (Fehlersuche, Dokumentation), wer hat was warum gemacht?
 - Featureentwicklung (ich mach was, was ansonsten den Code kaputt macht)
@@ -34,39 +47,53 @@ Ihr wollt das trotzdem wissen:
 * Arbeiten mit dem Repo Do's und Dont's
 
 checke ein:
-- Alles was andere brauchen um mit den Projekt arbeiten zu können.
-(Source, Makefiles, Doku, ...)
+
+- Alles was andere brauchen um mit den Projekt arbeiten zu können. (Source, Makefiles, Doku, ...)
 
 checke nicht ein was:
-- niemand sehen soll (Password, SSH-Key, kein Zugriffsschutz, .gitignore)
+
+- niemand sehen soll (Password, SSH-Key, ...)
 - niemand sehen muss (alles, was aus dem generiert werden kann, was schon eingecheckt ist, tmp files, persönliche Konfig)
 - niemand sehen will (kaputte Unit tests, nicht kompilierender Code...)
 
+Beachte: Es gibt keinen Zugriffsschutz.
 
-* Git Objekte
+Benutze die _.gitignore_ -Datei!
 
-Logische Objekte
-- Repository: Ein Container der eine Reihe von zusammengehörigen anderen Git Objekten verwaltet
-- Im Repository abgelegte Objekte:
-- Commit: Änderung an den Nutzdaten + Metadaten (Autor, Zeit, Commitmessage, ...). Aus diesen Daten leitet sich die Commit-Id ab.
-- Tag (Name für einen Commit)
-- Branch (eine Reihe von Commits) (svn trunk -> git master)
-(Abbildung)
+* Git Objekte: Logische Objekte
+
+- Repository: Container für Git-Objekte
+- Commit: Änderung an den Nutzdaten + Metadaten (Autor, Zeit, Message, ...)
+- Tag: Name für einen spezifischen Commit
+- Branch: Reihe lineare Folge von Commits (svn trunk -> git master)
+
+.image img/logical-objects.jpg
+
+
+* Git Objekte (weiter...)
 
 Filesystem Objekte
-- Repository (.git/)
-- working directory (Verzeichnis(baum) in dem .git/ liegt)
-- working directory ist immer genau eine Revision (Commit/Tag/Branch)
+
+- Repository ( Verzeichnis _.git_ )
+- working directory: Verzeichnisbaum, in dem _.git_ liegt
+
+Beachte: Das working directory enthält immer nur eine Revision (Commit/Tag/Branch) und kann frei editiert werden.
+
+Spezielle Dateien:
+
+- _.gitignore_ : Alles, was nicht ins Git soll
 
 
 * Dezentral verteilte Versionskontrollsysteme (DRCS)
+
 - Jeder arbeitet immer lokal mit einem vollständigen Repository
-- Alle Repos sind gleichwertig, und lassen sich synchronisieren (meist wird ein organisatorisch "zentrales" Repo ausgewält: ist immer im Netz, hat Backup etc)
+- Alle Repos sind gleichwertig und untereinander synchronisierbar
 - Keine (zentralen) Versionsnummern sondern Indizierung über den Inhalt
-- man muss nicht "online" sein um Commits, Tags und Branches bearbeiten zu können, nur zum Synchronisieren.
-(Abbildung)
+- Alle SCM Operationen offline verfügbar (Commit, Diff, Tag, Branch)
+
+.image img/scm-git.jpg
 
 
 * Und jetzt...
 
-Weiter geht's mit der Praxis!
+.link git-schulung-2-praxis.slide Weiter geht's mit der Praxis!
