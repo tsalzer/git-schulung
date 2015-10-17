@@ -32,33 +32,17 @@ Was bedeutet das *nicht*?
 .image img/overload.jpg
 .caption Das wäre zu viel. Ihr lernt die Grundlagen kennen und versteht, wo euch die Tools helfen.
 
-- Administration der Repos (Sprengt den Rahmen)
 
 * Ich komme gar nicht zum Andi in Projekt!
 
-Ihr wollt das trotzdem wissen:
+Ihr wollt das trotzdem wissen, weil:
 
-- Zusammenarbeit
-- Historie (Fehlersuche, Dokumentation), wer hat was warum gemacht?
-- Featureentwicklung (ich mach was, was ansonsten den Code kaputt macht)
-- Backup
-- Was haben wir dem Kunden wann geliefert (auch aus Debugging Sicht interessant)
+- Git erleichtert Zusammenarbeit.
+- Git erklärt Geschichte (Fehlersuche, Dokumentation, wer hat wann was warum und wie gemacht?)
+- Git erleichtert Featureentwicklung (Isolation: ich mach was, was ansonsten den Code kaputt macht).
+- Git _kann_ eine Art Backup sein -- aber kein Mülleimer!
+- Git entlastet Anwalt und Debugger (Was haben wir dem Kunden wann geliefert, was läuft da?)
 
-* Arbeiten mit dem Repo Do's und Dont's
-
-checke ein:
-
-- Alles was andere brauchen um mit den Projekt arbeiten zu können. (Source, Makefiles, Doku, ...)
-
-checke nicht ein was:
-
-- niemand sehen soll (Password, SSH-Key, ...)
-- niemand sehen muss (alles, was aus dem generiert werden kann, was schon eingecheckt ist, tmp files, persönliche Konfig)
-- niemand sehen will (kaputte Unit tests, nicht kompilierender Code...)
-
-Beachte: Es gibt keinen Zugriffsschutz.
-
-Benutze die _.gitignore_ -Datei!
 
 * Git Objekte: Logische Objekte
 
@@ -70,18 +54,28 @@ Benutze die _.gitignore_ -Datei!
 .image img/logical-objects.jpg
 
 
-* Git Objekte (weiter...)
-
-Filesystem Objekte
+* Git Objekte: Filesystem Objekte
 
 - Repository ( Verzeichnis _.git_ )
 - working directory: Verzeichnisbaum, in dem _.git_ liegt
+- _.gitignore_ : Alles, was nicht ins Git soll
 
 Beachte: Das working directory enthält immer nur eine Revision (Commit/Tag/Branch) und kann frei editiert werden.
 
-Spezielle Dateien:
 
-- _.gitignore_ : Alles, was nicht ins Git soll
+* Was gehört ins Repo?
+
+checke ein:
+
+- Alles was andere brauchen um mit den Projekt arbeiten zu können. (Source, Makefiles, Doku, ...)
+
+checke *nicht* ein was:
+
+- niemand sehen soll (Password, SSH-Key, vertrauliche Daten, ...)
+- niemand sehen muss (abgeleitete Daten wie Compilate, temporäre Dateien, persönliche Konfiguartionen, ...)
+- niemand sehen will (kaputte Unit tests, nicht kompilierender Code ...)
+
+*Beachte:* Es gibt keinen Zugriffsschutz. _(D'oh!)_
 
 
 * Dezentral verteilte Versionskontrollsysteme (DRCS)
