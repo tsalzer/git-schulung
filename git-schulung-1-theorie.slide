@@ -1,0 +1,99 @@
+Git Schulung: Theorie
+2015-10-19
+Tags: git
+
+Andreas Fett & Till Salzer
+iSAX
+andreas.fett@isax.com, till.salzer@isax.com
+http://isax.com
+
+
+* Ziel
+Ihr kommt beim Andi ins Projekt und sollt dort produktiv arbeiten und nix kaputt machen.
+
+Was bedeutet das?
+
+- Ihr arbeitet per *ssh* auf der _Kommandozeile_.
+- Ihr arbeitet im *vim*
+- Ihr checked Eure Arbeit in viele geteilte git *Repos* ein.
+
+.image img/shame.jpg
+.caption Geteilte Repos sind wie SVN Repos: Der Admin hat das Backup.
+
+* Ziel (weiter...)
+Ihr kommt beim Andi ins Projekt und sollt dort produktiv arbeiten und nix kaputt machen.
+
+Was bedeutet das *nicht*?
+
+- Wir erklären euch die IDE Integration (eclipse, netbeans, github, emacs, vim)
+- Wir erklären euch toolgebunden Workflows (z.B. _gitflow_)
+- Wir erklären euch Repo-Administration
+
+.image img/overload.jpg
+.caption Das wäre zu viel. Ihr lernt die Grundlagen kennen und versteht, wo euch die Tools helfen.
+
+- Administration der Repos (Sprengt den Rahmen)
+
+* Ich komme gar nicht zum Andi in Projekt!
+
+Ihr wollt das trotzdem wissen:
+
+- Zusammenarbeit
+- Historie (Fehlersuche, Dokumentation), wer hat was warum gemacht?
+- Featureentwicklung (ich mach was, was ansonsten den Code kaputt macht)
+- Backup
+- Was haben wir dem Kunden wann geliefert (auch aus Debugging Sicht interessant)
+
+* Arbeiten mit dem Repo Do's und Dont's
+
+checke ein:
+
+- Alles was andere brauchen um mit den Projekt arbeiten zu können. (Source, Makefiles, Doku, ...)
+
+checke nicht ein was:
+
+- niemand sehen soll (Password, SSH-Key, ...)
+- niemand sehen muss (alles, was aus dem generiert werden kann, was schon eingecheckt ist, tmp files, persönliche Konfig)
+- niemand sehen will (kaputte Unit tests, nicht kompilierender Code...)
+
+Beachte: Es gibt keinen Zugriffsschutz.
+
+Benutze die _.gitignore_ -Datei!
+
+* Git Objekte: Logische Objekte
+
+- Repository: Container für Git-Objekte
+- Commit: Änderung an den Nutzdaten + Metadaten (Autor, Zeit, Message, ...)
+- Tag: Name für einen spezifischen Commit
+- Branch: Reihe lineare Folge von Commits (svn trunk -> git master)
+
+.image img/logical-objects.jpg
+
+
+* Git Objekte (weiter...)
+
+Filesystem Objekte
+
+- Repository ( Verzeichnis _.git_ )
+- working directory: Verzeichnisbaum, in dem _.git_ liegt
+
+Beachte: Das working directory enthält immer nur eine Revision (Commit/Tag/Branch) und kann frei editiert werden.
+
+Spezielle Dateien:
+
+- _.gitignore_ : Alles, was nicht ins Git soll
+
+
+* Dezentral verteilte Versionskontrollsysteme (DRCS)
+
+- Jeder arbeitet immer lokal mit einem vollständigen Repository
+- Alle Repos sind gleichwertig und untereinander synchronisierbar
+- Keine (zentralen) Versionsnummern sondern Indizierung über den Inhalt
+- Alle SCM Operationen offline verfügbar (Commit, Diff, Tag, Branch)
+
+.image img/scm-git.jpg
+
+
+* Und jetzt...
+
+.link git-schulung-2-praxis.slide Weiter geht's mit der Praxis!

@@ -6,3 +6,8 @@
 .sw?
 
 # Lots of space for other favorite stuff to ignore here...
+
+# stuff we pull in via "go get"...
+/bin/*
+/pkg/*
+/src/golang.org/*
