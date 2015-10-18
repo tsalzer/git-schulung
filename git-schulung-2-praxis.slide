@@ -9,93 +9,182 @@ http://isax.com
 
 
 * Praxisteil
+
 Ihr probiert selbst einmal aus, wie sich Git auf der Kommandozeile anfühlt.
+
+(Ja, es ist Absicht, dass hier so wenig steht.)
 
 
 * Git configurieren (10m)
-  git config --global Author
+
+Wir machen das mit vim:
+
+  export VISUAL=vim
+
+Git braucht für jeden Commit einen verantwortlichen Author:
+
+  git config --global user.name
+  git config --global user.email
+
+Im Jahr 2015 haben wir schon Farbfernsehen:
+
   git config --global uicolor
 
+
 * Clonen eines bestehenden Repos (5min)
-(Überleitung)
 
-  git clone  # (remote git nativ)
-  git log
-  git log  # (fancy)
-  git status (on branch master)
+Remote-Repo clonen:
+
+  git clone git://repo/remote/demorepo.git  # (remote git nativ)
+  cd demorepo
+
+Übersicht über das Repo:
+
+  ls -la        # alle Dateinen im working directory
+  git log       # Versionsgeschichte
+  git log --graph --oneline --decorate=short --all  # (fancy)
+  git status    # aktueller Stand (on branch master)
 
 
-* Einchecken einer Datei (Unterschied Index Commit) (5min + 5 Reibungsverluste)
-(neue Datei)
-- eine neue Datei anlegen (vim foo.txt)
+* Einchecken einer neuen Datei (5min + 5 Reibungsverluste)
+
+Unterschied zwischen Index und Commit:
+
+- eine neue Datei anlegen:
+
+  vim foo.txt
   git status
+
 - git hat eine "Staging Area" (Index) um den Commit "vorzubereiten"
 
   git add foo.txt
   git status
 
-  git commit (-v)
+  git commit -v
 
-*Beachten:*
-Commit Message: Format und Inhalt
-- muss gesetzt sein (Denkt dran, das ist Doku, Nachvollziebarkeit!)
-- Format Subject, Leerzeile, Body
+*Beachten:* Commit Messages sind Dokumentation!
+- Format 50-0-72 ("eMail-Format")
+- Inhalt: Imperativ, _was_ und _warum_, nicht _wie_ (Kontext für Nachvollziehbarkeit)
 
   git status
   git log
 
-* Änderung (5min)
-(Konflikt vorprogrammieren (paarweise))
 
-  git diff
+* Änderungen (5min)
+
+Eigene Ändereungen verfolgen:
+
+  git diff      # lokale Änderungen auf dem Index
+  git status    # Status
+  git add ...   # Änderung zum Index hinzufügen
   git status
-  git add
-  git status
-  git diff
-  git diff --cached
+  git diff      # ?!?
+  git diff --cached     # !!!
   git commit -v
+
+Ich frage mich ob es hier später Probleme geben wird...
 
 
 * Push (5min)
-  git push (rejected, erklären)
-  git fetch (sync des upstream zu Euch)
-  git status (keine Änderung)
-  git log --all
+
+Eigene Änderungen publizieren:
+
+  git push origin master    # Oh! WIr bekommen einige rejects! Warum?
+
+Sicheres Synchronisieren mit dem Upstream:
+
+  git fetch origin  # sync mit dem upstream
+  git status        # keine Änderung zu sehen
+  git log --all     # probiert auch das fancy log!
+
+Fazit: Ein _git_ _fetch_ läßt euren Code unberührt und ist immer sicher.
+
 
 * Konflikt Lösung (5min)
 
-  git rebase # (was passiert hier)
-  git status # (Konflikt angezeigt)
+Einfache Konflikte können teilweise automatisch gelöst werden:
 
-Konflikt lösen: Editieren mit *vim*
+  git rebase origin/master  # (was passiert hier)
+  git status                # (Konflikt angezeigt)
+
+Konkurrierende Änderungen müssen manuell gelöst werden:
+
+  vim <siehe Output von git status>
+
+Nach der Lösung wird die korrigierte Datei dem Index zugeführt:
 
   git add
-  git commit
+
+Zuletzt wird der Rebase-Vorgang fortgesetzt:
+
+  git rebase --cont
+
+Hätten wir einen Konflikt bei _git_ _merge_, nicht bei _git_ _rebase_:
+
+  git commit -v
 
 
-* Fetch und rebase bis commit durch geht (5min)
-Erklärung: Lokales Repo muss in sync mit Remote sein
+* Fetch und Rebase bis es geht! (5min)
 
-  git push
-  git rebase
+Das lokale Repo ist jetzt (so weit wir wissen) in sync mit dem remote Repo.
 
-ohne Konflikt!
+  git push origin master
+
+Doch nicht schnell genug? Das ist normal. Einfach weitermachen:
+
+  git fetch ...
+  git rebase origin/master
+  git push origin master
+
+Rinse, repeat. Ihr seid fertig, wenn jeder seinen Code ohne Konflikte hochgeladen hat.
+
 
 * Branch anlegen (5min)
-  git checkout -b foobar
-  git status  # (on branch foobar)
-  git checkout master
-  git status  # (on branch master)
-  git checkout foobar
-  git status  # (on branch foobar)
-commit auf Branch:
-  git commit -v
-  push auf branch
 
-* Integration (nur Vortänzer) 5min
+*Achtung:* Statt _<foobar>_ benutzt den Namen auf eurem Platzzettel!
+
+  git checkout -b <foobar>  # neuer Branch <foobar>
+  git status                # (on branch <foobar>)
+  git checkout master
+  git status                # (on branch master)
+  git checkout foobar
+  git status                # (on branch <foobar>)
+
+commit auf Branch:
+
+  git commit -v
+  git push origin <foobar>
+
+(Hausaufgabe: Warum können wir nicht alle den Branch _foobar_ benutzen?)
+
+
+* Integration (nur Vortänzer, 5min)
+
+Out Of Time! Daher: Wie sammeln wir all diese Branches ein?
+
+Übersicht über alle Branches holen:
+
+  git fetch origin
+
+Alle _remote_ Branches anzeigen:
+
   git branch -r
-  git merge alle branch namen
-  git log
+
+Alle _reote_ Branches in den aktuellen _master_ mergen:
+
+  git merge <alle remote branch namen>  # Boah! Ein Octomerge!
+
+Und so sieht's dann aus:
+
+  git log --graph
+
 
 * The End.
-60min
+
+Funktioniert denn auch alles?
+
+Das erfahrt ihr in der nächsten Folge, wenn es heisst:
+
+*Mehr* *Spass* *mit* *git* *!*
+
+(Oder in Andis Projekt.)
