@@ -1,0 +1,13 @@
+# Anything IDEA. Which *is* my favorite editor.
+.idea
+
+# Anything VIM. Which is my second favorite editor.
+.*.sw?
+.sw?
+
+# Lots of space for other favorite stuff to ignore here...
+
+# stuff we pull in via "go get"...
+bin
+pkg
+src/golang.org
