@@ -1,3 +1,6 @@
+# This excludes files from being trandferred to the Docker build environment.
+# Anything in here *cannot* be seen from the Dockerfile.
+
 # Anything IDEA. Which *is* my favorite editor.
 .idea
 
@@ -7,7 +10,12 @@
 
 # Lots of space for other favorite stuff to ignore here...
 
-# stuff we pull in via "go get"...
+# golang:
+# compiled stuff. compiling should be done in the target environment.
+# Do not copy over stuff from the build machine.
 bin
 pkg
+
+# stuff we pull in via "go get"...
+# Same as above: This is expected to be pulled in at build time.
 src/golang.org
